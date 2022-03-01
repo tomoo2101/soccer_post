@@ -1,0 +1,11 @@
+
+<% @posts.each do |post| %>
+    <%= post.title %>
+    <%= post.body %>
+    <%= post.area %>
+<% end %>
+
+<%= form_with url: posts_path, method: :get, local: true do |f| %>
+<%= f.text_field :area, value: @area %>
+<%= f.submit "検索"%>
+<% end %>
