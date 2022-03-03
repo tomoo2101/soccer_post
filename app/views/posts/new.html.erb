@@ -1,4 +1,4 @@
-<section class="hero is-success">
+<section class="hero is-info">
   <div class="hero-body">
     <div class="container">
       <h1 class="title">
@@ -10,9 +10,9 @@
 
 <% if @post.errors.any? %>
   <div class="notification is-danger">
-    <h2><%= pluralize(@recipe.errors.count, "error") %> prohibited this object from being saved: not successfully</h2>
+    <h2><%= pluralize(@post.errors.count, "error") %> 入力されていない項目があります。</h2>
     <ul>
-      <% @recipe.errors.full_messages.each do |message| %>
+      <% @post.errors.full_messages.each do |message| %>
       <li><%= message %></li>
       <% end %>
     </ul>
@@ -35,7 +35,7 @@
           </div>
 
           <div class="field">
-            <%= f.label :area, "場所（東京23区）", class: "label" %>
+            <%= f.label :area, "場所（東京23区）例：渋谷区", class: "label" %>
             <%= f.text_field :area, class: "input" %>
           </div>
 

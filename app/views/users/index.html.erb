@@ -1,5 +1,5 @@
 <%# 指導者一覧にしたいので投稿を一つ以上持っている人の一覧にしたい %>
-<section class="hero is-success">
+<section class="hero is-info">
   <div class="hero-body">
     <div class="container">
       <h1 class="title" style="font-family: serif">
@@ -31,7 +31,7 @@
                 </div>
               </div>
               <div class="content">
-                投稿数:
+                投稿数:<%= user.posts.count %>
               </div>
             </div>
           </div>

@@ -1,11 +1,62 @@
+<section class="hero is-info">
+  <div class="hero-body">
+    <div class="container">
+      <h1 class="title">
+        プラン一覧
+      </h1>
+      <p class="subtitle">
+        近所の地域を選択できます
+      </p>
+    </div>
+  </div>
+</section><br>
 
-<% @posts.each do |post| %>
-    <%= post.title %>
-    <%= post.body %>
-    <%= post.area %>
-<% end %>
+<div class="columns is-mobile is-centered">
+  <div class=title style="font-size:12px">場所を検索（今回は東京23区、例：渋谷区）</div>
+</div>
+<div class="columns is-mobile is-centered">
+  <%= form_with url: posts_path, method: :get, local: true do |f| %>
+    <%= f.text_field :area, value: @area %>
+    <%= f.submit "検索"%>
+  <% end %>
+</div>
 
-<%= form_with url: posts_path, method: :get, local: true do |f| %>
-<%= f.text_field :area, value: @area %>
-<%= f.submit "検索"%>
-<% end %>
+
+<section class="section">
+  <div class="container">
+    <div class="columns is-multiline">
+      <% @posts.each do |post| %>
+        <div class="column is-4">
+          <div class="card">
+
+            <div class="card-header">
+              <div class="card-header-title"><%= link_to post.user.username, user_path(post.user)%></div>
+            </div>
+            <div class="card-image">
+              <figure class="image is-4by3">
+                <%= attachment_image_tag post.user, :profile_image, fallback: "no-image.png" %>
+              </figure>
+            </div>
+
+            <div class="card-content">
+              <div class="media">
+                <div class="media-content">
+                  <div class="media-content">
+                    <div class="subtitle" style="font-size:12px"><%= link_to post.title, post_path(post) %></div>
+                    <div class="subtitle" style="font-size:12px"><%= link_to "↑→プラン詳細ページ←↑", post_path(post) %></div>
+                    <div class="subtitle" style="font-size:12px">場所：<%= post.area %></div>
+                    <div class="subtitle" style="font-size:12px">いいねの数：<%= post.liked_users.count %></div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="content">
+                更新日<time><%= post.updated_at.strftime("%Y-%m-%d %H:%M") %></time>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end%>
+    </div>
+  </div>
+</section>
